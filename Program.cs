@@ -20,18 +20,15 @@ namespace Etapa1
             var otraColeccion = new List<Curso>(){
                 new Curso(){Nombre = "401", Jornada=TiposJornada.Mañana},
                 new Curso(){Nombre = "501", Jornada=TiposJornada.Mañana},
-                new Curso(){Nombre = "502", Jornada=TiposJornada.Tarde}
+                new Curso(){Nombre = "501", Jornada=TiposJornada.Tarde}
             };
-            // Curso temp = new Curso { Nombre = "101 Vacacional", Jornada = TiposJornada.Noche };
 
-            // otraColeccion.Clear(); //Remueve TODO
             escuela.Cursos.AddRange(otraColeccion);
-            // escuela.Cursos.Add(temp);
             ImprimirCursosEscuela(escuela);
-            // WriteLine("Curso.Hash" + temp.GetHashCode());
-            Predicate<Curso> miAlgoritmo = Predicado;
-            escuela.Cursos.RemoveAll(miAlgoritmo);
-            // escuela.Cursos.Remove(temp);
+
+            escuela.Cursos.RemoveAll((cur) => cur.Nombre == "501" && cur.Jornada == TiposJornada.Mañana);
+
+
             ImprimirCursosEscuela(escuela);
         }
 

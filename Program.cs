@@ -10,44 +10,38 @@ namespace Etapa1
         {
             var escuela = new Escuela("ITI", 2020, TiposEscuela.Primaria, pais: "Colombia", ciudad: "Bogota");
             escuela.Cursos = new List<Curso>(){
-                new Curso(){Nombre = "101"},
-                new Curso(){Nombre = "201"},
-                new Curso(){Nombre = "301"}
+                new Curso(){Nombre = "101", Jornada=TiposJornada.Mañana},
+                new Curso(){Nombre = "201", Jornada=TiposJornada.Mañana},
+                new Curso(){Nombre = "301", Jornada=TiposJornada.Mañana}
             };
+            escuela.Cursos.Add(new Curso() { Nombre = "102", Jornada = TiposJornada.Tarde });
+            escuela.Cursos.Add(new Curso() { Nombre = "202", Jornada = TiposJornada.Tarde });
 
+            var otraColeccion = new List<Curso>(){
+                new Curso(){Nombre = "401", Jornada=TiposJornada.Mañana},
+                new Curso(){Nombre = "501", Jornada=TiposJornada.Mañana},
+                new Curso(){Nombre = "502", Jornada=TiposJornada.Tarde}
+            };
+            // Curso temp = new Curso { Nombre = "101 Vacacional", Jornada = TiposJornada.Noche };
+
+            // otraColeccion.Clear(); //Remueve TODO
+            escuela.Cursos.AddRange(otraColeccion);
+            // escuela.Cursos.Add(temp);
             ImprimirCursosEscuela(escuela);
+            // WriteLine("Curso.Hash" + temp.GetHashCode());
+            Predicate<Curso> miAlgoritmo = Predicado;
+            escuela.Cursos.RemoveAll(miAlgoritmo);
+            // escuela.Cursos.Remove(temp);
+            ImprimirCursosEscuela(escuela);
+        }
 
-            bool rta = 10 == 10;
-            int cant = 10;
-            if (rta == false)
-            {
-                WriteLine("Se cumplio la condicion 1 ");
-            }
-            else if (cant > 15)
-            {
-                WriteLine("Se cumplio la condicion 2 ");
-
-            }
-            else
-            {
-                WriteLine("No se cumplio ninguna condicion");
-
-            }
-            if (cant > 5 && rta == false)
-            {
-                WriteLine("Se cumplio la condicion 3 ");
-            }
-
-            if (cant > 5 && rta)
-            {
-                WriteLine("Se cumplio la condicion 4 ");
-            }
-            cant = 10;
-            if ((cant > 15 || !rta) && (cant % 5 == 0))
-            {
-                WriteLine("Se cumplio la condicion 5 ");
-            }
-
+        private static bool Predicado(Curso cursoobj)
+        {
+            return cursoobj.Nombre == "301";
+        }
+        private static int PredicadoMalHecho(Curso cursoobj)
+        {
+            return 301;
         }
 
         private static void ImprimirCursosEscuela(Escuela escuela)
@@ -67,9 +61,6 @@ namespace Etapa1
                 return;
             }
         }
-
-
-
         private static void ImprimirCursosForEach(Curso[] arregloCursos)
         {
             foreach (var @as in arregloCursos)

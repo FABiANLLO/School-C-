@@ -17,16 +17,17 @@ namespace CoreEscuela
             this.Escuela = new Escuela("ITI", 2020, TiposEscuela.Primaria, pais: "Colombia", ciudad: "Bogota");
             CargarCursos();
             CargarAsignaturas();
-            foreach (var curso in Escuela.Cursos)
-            {
-                curso.Alumnos.AddRange(CargarAlumnos());
 
-            }
             CargarEvaluaciones();
 
         }
 
         private void CargarEvaluaciones()
+        {
+
+        }
+
+        private void CargarAsignaturas()
         {
             foreach (var curso in Escuela.Cursos)
             {
@@ -36,16 +37,11 @@ namespace CoreEscuela
                     new Asignatura{Nombre="Castellano"},
                     new Asignatura{Nombre="Ciencias Naturales"}
                 };
-                curso.Asignaturas.AddRange(listaAsignaturas);
+                curso.Asignaturas = listaAsignaturas;
             }
         }
 
-        private void CargarAsignaturas()
-        {
-            throw new NotImplementedException();
-        }
-
-        private IEnumerable<Alumno> CargarAlumnos()
+        private List<Alumno> GenerarAlumnosAzar(int cant)
         {
             string[] nombre1 = { "Fabian", "Andres", "Alexander", "Camilo", "Felipe", "Nicolas", "Jose" };
             string[] nombre2 = { "Freddy", "David", "Leonidas", "Raul", "Carlos", "Diego", "Oscar" };
@@ -54,7 +50,7 @@ namespace CoreEscuela
                                from n2 in nombre2
                                from a1 in apellido
                                select new Alumno { Nombre = $"{n1} {n2} {a1}" };
-            return listaAlumnos;
+            return listaAlumnos.OrderBy((al) => al.UniqueId).Take(cant).ToList();
         }
 
         private void CargarCursos()
@@ -66,6 +62,12 @@ namespace CoreEscuela
                 new Curso(){Nombre = "401", Jornada=TiposJornada.Tarde},
                 new Curso(){Nombre = "501", Jornada=TiposJornada.Tarde}
             };
+            Random rnd = new Random();
+            foreach (var curso in Escuela.Cursos)
+            {
+                int cantRandom = rnd.Next(5, 20);
+                curso.Alumnos = GenerarAlumnosAzar(cantRandom);
+            }
         }
     }
 }

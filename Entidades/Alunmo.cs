@@ -1,16 +1,11 @@
 using System;
+using System.Collections.Generic;
 
-namespace CoreEscuela
+namespace CoreEscuela.Entidades
 {
-    public class Alumno
+    public class Alumno : ObjetoEscuelaBase
     {
-        public string UniqueId { get; private set; }
-        public string Nombre { get; set; }
-        public Alumno()
-        {
-            this.UniqueId = Guid.NewGuid().ToString();
-        }
-
+        public List<Evaluacion> Evaluaciones { get; set; } = new List<Evaluacion>();
     }
 
 }

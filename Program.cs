@@ -30,7 +30,22 @@ namespace CoreEscuela
             WriteLine($"Alumno: {ob.UniqueId}");
             WriteLine($"Alumno: {ob.GetType()}");
 
-            
+            var evaluacion = new Evaluacion { Nombre = "Evaluacion de Mate", Nota = 4.5f };
+            Printer.WriteTitle("Objeto Evaluacion");
+            WriteLine($"Evaluacion: {evaluacion.Nombre}");
+            WriteLine($"Evaluacion: {evaluacion.UniqueId}");
+            WriteLine($"Evaluacion: {evaluacion.Nota}");
+            WriteLine($"Evaluacion: {evaluacion.GetType()}");
+
+            // ob = evaluacion;
+
+            if (ob is Alumno)
+            {
+                Alumno alumnoRecuperado = (Alumno)ob;
+            }
+
+            Alumno alumnoRecuperado2 = ob as Alumno;
+
 
         }
 

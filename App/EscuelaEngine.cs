@@ -4,7 +4,7 @@ using System.Linq;
 using CoreEscuela.Entidades;
 
 namespace CoreEscuela
-{ 
+{
     public sealed class EscuelaEngine
     {
         public Escuela Escuela { get; set; }
@@ -20,6 +20,28 @@ namespace CoreEscuela
 
             CargarEvaluaciones();
 
+            GetObjetosEscuela();
+
+        }
+
+        public List<ObjetoEscuelaBase> GetObjetosEscuela()
+        {
+            var listObj = new List<ObjetoEscuelaBase>();
+
+            listObj.Add(Escuela);
+            listObj.AddRange(Escuela.Cursos);
+            foreach (var curso in Escuela.Cursos)
+            {
+                listObj.AddRange(curso.Asignaturas);
+                listObj.AddRange(curso.Alumnos);
+
+                foreach (var alumno in curso.Alumnos)
+                {
+                    listObj.AddRange(alumno.Evaluaciones);
+                }
+            }
+
+            return listObj;
         }
 
         private void CargarEvaluaciones()

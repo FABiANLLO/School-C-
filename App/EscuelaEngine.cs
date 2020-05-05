@@ -43,7 +43,7 @@ namespace CoreEscuela
 
             return listObj;
         }
-
+        #region Metodos de Carga
         private void CargarEvaluaciones()
         {
             // var lista = new List<Evaluacion>();
@@ -112,5 +112,6 @@ namespace CoreEscuela
                 curso.Alumnos = GenerarAlumnosAzar(cantRandom);
             }
         }
+        #endregion
     }
 }

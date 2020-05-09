@@ -17,12 +17,9 @@ namespace CoreEscuela
             this.Escuela = new Escuela("ITI", 2020, TiposEscuela.Primaria, pais: "Colombia", ciudad: "Bogota");
             CargarCursos();
             CargarAsignaturas();
-
             CargarEvaluaciones();
-
-            // GetObjetosEscuela();
-
         }
+    
         public IReadOnlyList<ObjetoEscuelaBase> GetObjetosEscuela(bool traeEvaluaciones = true, bool traeAsignaturas = true, bool traeEstudiantes = true, bool traeCursos = true)
         {
             return GetObjetosEscuela(out int dummy, out dummy, out dummy, out dummy);

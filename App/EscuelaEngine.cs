@@ -23,24 +23,24 @@ namespace CoreEscuela
             // GetObjetosEscuela();
 
         }
-        public List<ObjetoEscuelaBase> GetObjetosEscuela(bool traeEvaluaciones = true, bool traeAsignaturas = true, bool traeEstudiantes = true, bool traeCursos = true)
+        public IReadOnlyList<ObjetoEscuelaBase> GetObjetosEscuela(bool traeEvaluaciones = true, bool traeAsignaturas = true, bool traeEstudiantes = true, bool traeCursos = true)
         {
             return GetObjetosEscuela(out int dummy, out dummy, out dummy, out dummy);
         }
-        public List<ObjetoEscuelaBase> GetObjetosEscuela(out int conteoEvaluaciones, bool traeEvaluaciones = true, bool traeAsignaturas = true, bool traeEstudiantes = true, bool traeCursos = true)
+        public IReadOnlyList<ObjetoEscuelaBase> GetObjetosEscuela(out int conteoEvaluaciones, bool traeEvaluaciones = true, bool traeAsignaturas = true, bool traeEstudiantes = true, bool traeCursos = true)
         {
             return GetObjetosEscuela(out conteoEvaluaciones, out int dummy, out dummy, out dummy);
         }
-        public List<ObjetoEscuelaBase> GetObjetosEscuela(out int conteoEvaluaciones, out int conteoAlumnos, bool traeEvaluaciones = true, bool traeAsignaturas = true, bool traeEstudiantes = true, bool traeCursos = true)
+        public IReadOnlyList<ObjetoEscuelaBase> GetObjetosEscuela(out int conteoEvaluaciones, out int conteoAlumnos, bool traeEvaluaciones = true, bool traeAsignaturas = true, bool traeEstudiantes = true, bool traeCursos = true)
         {
             return GetObjetosEscuela(out conteoEvaluaciones, out conteoAlumnos, out int dummy, out dummy);
         }
-        public List<ObjetoEscuelaBase> GetObjetosEscuela(out int conteoEvaluaciones, out int conteoAlumnos, out int conteoAsignaturas, bool traeAsignaturas = true, bool traeEstudiantes = true, bool traeCursos = true)
+        public IReadOnlyList<ObjetoEscuelaBase> GetObjetosEscuela(out int conteoEvaluaciones, out int conteoAlumnos, out int conteoAsignaturas, bool traeAsignaturas = true, bool traeEstudiantes = true, bool traeCursos = true)
         {
             return GetObjetosEscuela(out conteoEvaluaciones, out conteoAlumnos, out conteoAsignaturas, out int dummy);
         }
 
-        public List<ObjetoEscuelaBase> GetObjetosEscuela(out int conteoEvaluaciones, out int conteoAlumnos, out int conteoAsignaturas, out int conteoCursos, bool traeEvaluaciones = true, bool traeAsignaturas = true, bool traeEstudiantes = true, bool traeCursos = true)
+        public IReadOnlyList<ObjetoEscuelaBase> GetObjetosEscuela(out int conteoEvaluaciones, out int conteoAlumnos, out int conteoAsignaturas, out int conteoCursos, bool traeEvaluaciones = true, bool traeAsignaturas = true, bool traeEstudiantes = true, bool traeCursos = true)
         {
             conteoAlumnos = conteoAsignaturas = conteoEvaluaciones = conteoCursos = 0;
             var listObj = new List<ObjetoEscuelaBase>();
@@ -72,7 +72,7 @@ namespace CoreEscuela
                     }
                 }
             }
-            return (listObj);
+            return (listObj.AsReadOnly());
         }
 
         #region Metodos de Carga

@@ -14,22 +14,7 @@ namespace CoreEscuela
             engine.Inicializar();
 
             Printer.WriteTitle("Bienvenidos a la Escuela");
-            // Printer.Beep(cant: 10);
-            Dictionary<int, string> diccionario = new Dictionary<int, string>();
-            diccionario.Add(10, "Fabian");
-            diccionario.Add(11, "Andres");
-            foreach (var keyValPair in diccionario)
-            {
-                WriteLine($"Key: {keyValPair.Key} Valor: {keyValPair.Value}");
-            }
-            Printer.WriteTitle("Acceso a Diccionario");
-            diccionario[0] = "Julieth";
-            WriteLine(diccionario[0]);
-
-            var dic = new Dictionary<string, string>();
-            Printer.WriteTitle("Diccionario Nuevo");
-
-
+            
         }
 
         private static void ImprimirCursosEscuela(Escuela escuela)
@@ -40,7 +25,7 @@ namespace CoreEscuela
                 foreach (var curso in escuela.Cursos)
                 {
                     WriteLine($"Nombre {curso.Nombre}, Id {curso.UniqueId}");
-                }
+                } 
             }
             else
             {

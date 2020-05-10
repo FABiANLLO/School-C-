@@ -19,7 +19,16 @@ namespace CoreEscuela
             CargarAsignaturas();
             CargarEvaluaciones();
         }
-    
+        public Dictionary<string, IEnumerable<ObjetoEscuelaBase>> GetDictionarioObjetos()
+        {
+            const string 
+            var diccionario = new Dictionary<string, IEnumerable<ObjetoEscuelaBase>>();
+            diccionario.Add("Escuela", new[] { Escuela });
+            diccionario.Add("Cursos", Escuela.Cursos.Cast<ObjetoEscuelaBase>());
+
+            return diccionario;
+        }
+
         public IReadOnlyList<ObjetoEscuelaBase> GetObjetosEscuela(bool traeEvaluaciones = true, bool traeAsignaturas = true, bool traeEstudiantes = true, bool traeCursos = true)
         {
             return GetObjetosEscuela(out int dummy, out dummy, out dummy, out dummy);

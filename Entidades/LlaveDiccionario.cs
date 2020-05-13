@@ -5,7 +5,7 @@ namespace Etapa1.Entidades
         Curso,
         Alumno,
         Asignatura,
-        Evaluacione,
+        Evaluacion,
         Escuela,
     }
 }

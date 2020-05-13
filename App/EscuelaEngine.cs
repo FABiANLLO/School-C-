@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CoreEscuela.Entidades;
+using CoreEscuela.Util;
 using Etapa1.Entidades;
 
 namespace CoreEscuela
@@ -20,11 +21,38 @@ namespace CoreEscuela
             CargarAsignaturas();
             CargarEvaluaciones();
         }
+        public void ImprimirDiccionario(Dictionary<LlaveDiccionario, IEnumerable<ObjetoEscuelaBase>> dic)
+        {
+            foreach (var obj in dic)
+            {
+                Printer.WriteTitle(obj.Key.ToString());
+                Console.WriteLine(obj);
+                foreach (var val in obj.Value)
+                {
+                    Console.WriteLine(val);
+                }
+            }
+        }
         public Dictionary<LlaveDiccionario, IEnumerable<ObjetoEscuelaBase>> GetDictionarioObjetos()
         {
             var diccionario = new Dictionary<LlaveDiccionario, IEnumerable<ObjetoEscuelaBase>>();
             diccionario.Add(LlaveDiccionario.Escuela, new[] { Escuela });
             diccionario.Add(LlaveDiccionario.Curso, Escuela.Cursos.Cast<ObjetoEscuelaBase>());
+            var listatemp = new List<Evaluacion>();
+            var listatempAs = new List<Asignatura>();
+            var listatempAl = new List<Alumno>();
+            foreach (var curso in Escuela.Cursos)
+            {
+                listatempAs.AddRange(curso.Asignaturas);
+                listatempAl.AddRange(curso.Alumnos);
+                foreach (var alumno in curso.Alumnos)
+                {
+                    listatemp.AddRange(alumno.Evaluaciones);
+                }
+            }
+            diccionario.Add(LlaveDiccionario.Evaluacion, listatemp.Cast<ObjetoEscuelaBase>());
+            diccionario.Add(LlaveDiccionario.Asignatura, listatempAs.Cast<ObjetoEscuelaBase>());
+            diccionario.Add(LlaveDiccionario.Alumno, listatempAl.Cast<ObjetoEscuelaBase>());
 
             return diccionario;
         }

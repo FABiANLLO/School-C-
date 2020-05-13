@@ -10,15 +10,22 @@ namespace CoreEscuela
     {
         static void Main(string[] args)
         {
+            AppDomain.CurrentDomain.ProcessExit += AccionDelEvento;
+            AppDomain.CurrentDomain.ProcessExit += (o, s) => Printer.Beep(1000, 1000, 1);
+            AppDomain.CurrentDomain.ProcessExit -= AccionDelEvento;
             var engine = new EscuelaEngine();
             engine.Inicializar();
-
             Printer.WriteTitle("Bienvenidos a la Escuela");
             ImprimirCursosEscuela(engine.Escuela);
             var dictmp = engine.GetDictionarioObjetos();
             engine.ImprimirDiccionario(dictmp, true);
+        }
 
-
+        private static void AccionDelEvento(object sender, EventArgs e)
+        {
+            Printer.WriteTitle("Saliendo");
+            Printer.Beep(3000, 1000, 3);
+            Printer.WriteTitle("Salio");
         }
 
         private static void ImprimirCursosEscuela(Escuela escuela)

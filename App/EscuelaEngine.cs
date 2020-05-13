@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CoreEscuela.Entidades;
+using Etapa1.Entidades;
 
 namespace CoreEscuela
 {
@@ -19,12 +20,11 @@ namespace CoreEscuela
             CargarAsignaturas();
             CargarEvaluaciones();
         }
-        public Dictionary<string, IEnumerable<ObjetoEscuelaBase>> GetDictionarioObjetos()
+        public Dictionary<LlaveDiccionario, IEnumerable<ObjetoEscuelaBase>> GetDictionarioObjetos()
         {
-            const string 
-            var diccionario = new Dictionary<string, IEnumerable<ObjetoEscuelaBase>>();
-            diccionario.Add("Escuela", new[] { Escuela });
-            diccionario.Add("Cursos", Escuela.Cursos.Cast<ObjetoEscuelaBase>());
+            var diccionario = new Dictionary<LlaveDiccionario, IEnumerable<ObjetoEscuelaBase>>();
+            diccionario.Add(LlaveDiccionario.Escuela, new[] { Escuela });
+            diccionario.Add(LlaveDiccionario.Curso, Escuela.Cursos.Cast<ObjetoEscuelaBase>());
 
             return diccionario;
         }

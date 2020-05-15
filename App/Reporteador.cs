@@ -31,14 +31,25 @@ namespace CoreEscuela
         }
         public IEnumerable<string> GetListaAsignaturas()
         {
-            var listaEvaluaciones = GetListaEvaluaciones();
+            return GetListaAsignaturas(out var dummy);
+        }
+        public IEnumerable<string> GetListaAsignaturas(out IEnumerable<Evaluacion> listaEvaluaciones)
+        {
+            listaEvaluaciones = GetListaEvaluaciones();
             // return from Evaluacion ev in listaEvaluaciones where ev.Nota >= 3.0f  select ev.Asignatura;
             return (from Evaluacion ev in listaEvaluaciones select ev.Asignatura.Nombre).Distinct();
         }
         public Dictionary<string, IEnumerable<Evaluacion>> GetDiccionarioEvaluacionesAsignatura()
         {
-            var DicEvAsing = new Dictionary<string, IEnumerable<Evaluacion>>();
-            return DicEvAsing;
+            var dicEvAsing = new Dictionary<string, IEnumerable<Evaluacion>>();
+
+            var listaAsignaturas = GetListaAsignaturas(out var listaEval);
+            foreach (var asign in listaAsignaturas)
+            {
+                var evalAsign = from eval in listaEval where eval.Asignatura.Nombre == asign select eval;
+                dicEvAsing.Add(asign, evalAsign);
+            }
+            return dicEvAsing;
         }
     }
 }

@@ -21,6 +21,7 @@ namespace CoreEscuela
             reporteador.GetListaEvaluaciones();
             var lisAsign = reporteador.GetListaAsignaturas();
             var lisEvalAsign = reporteador.GetDiccionarioEvaluacionesAsignatura();
+            var lisPromedioAsign = reporteador.GetPromedioAlumAsignatura();
         }
 
         private static void AccionDelEvento(object sender, EventArgs e)

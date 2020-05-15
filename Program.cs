@@ -10,16 +10,16 @@ namespace CoreEscuela
     {
         static void Main(string[] args)
         {
-            AppDomain.CurrentDomain.ProcessExit += AccionDelEvento;
-            AppDomain.CurrentDomain.ProcessExit += (o, s) => Printer.Beep(1000, 1000, 1);
-            AppDomain.CurrentDomain.ProcessExit -= AccionDelEvento;
+            // AppDomain.CurrentDomain.ProcessExit += AccionDelEvento;
+            // AppDomain.CurrentDomain.ProcessExit += (o, s) => Printer.Beep(1000, 1000, 1);
+            // AppDomain.CurrentDomain.ProcessExit -= AccionDelEvento;
             var engine = new EscuelaEngine();
             engine.Inicializar();
             Printer.WriteTitle("Bienvenidos a la Escuela");
 
             var reporteador = new Reporteador(engine.GetDictionarioObjetos());
-            
-
+            reporteador.GetListaEvaluaciones();
+            var lisAsign = reporteador.GetListaAsignaturas();
         }
 
         private static void AccionDelEvento(object sender, EventArgs e)

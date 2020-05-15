@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using CoreEscuela.Entidades;
 using Etapa1.Entidades;
@@ -19,7 +20,25 @@ namespace CoreEscuela
         }
         public IEnumerable<Evaluacion> GetListaEvaluaciones()
         {
-            _diccionario(LlaveDiccionario.Evaluacion, );
+            if (_diccionario.TryGetValue(LlaveDiccionario.Evaluacion, out IEnumerable<ObjetoEscuelaBase> lista))
+            {
+                return lista.Cast<Evaluacion>();
+            }
+            else
+            {
+                return new List<Evaluacion>();
+            }
+        }
+        public IEnumerable<string> GetListaAsignaturas()
+        {
+            var listaEvaluaciones = GetListaEvaluaciones();
+            // return from Evaluacion ev in listaEvaluaciones where ev.Nota >= 3.0f  select ev.Asignatura;
+            return (from Evaluacion ev in listaEvaluaciones select ev.Asignatura.Nombre).Distinct();
+        }
+        public Dictionary<string, IEnumerable<Evaluacion>> GetDiccionarioEvaluacionesAsignatura()
+        {
+            var DicEvAsing = new Dictionary<string, IEnumerable<Evaluacion>>();
+            return DicEvAsing;
         }
     }
 }

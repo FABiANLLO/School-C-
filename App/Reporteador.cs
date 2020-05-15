@@ -57,16 +57,20 @@ namespace CoreEscuela
             var dicEvalAsing = GetDiccionarioEvaluacionesAsignatura();
             foreach (var asigConEval in dicEvalAsing)
             {
-                var dummy = from eval in asigConEval.Value
-                            group eval by
-                                eval.Alumno.UniqueId
+                var promeAlums = from eval in asigConEval.Value
+                                 group eval by new
+                                 {
+                                     eval.Alumno.UniqueId,
+                                     eval.Alumno.Nombre
+                                 }
                             into grupoEvalAlumno
-                            select new
-                            {
-                                AlumnoId = grupoEvalAlumno.Key,
-                                Promedio = grupoEvalAlumno.Average(evalua => evalua.Nota)
-                            };
-
+                                 select new AlumnoPromedio
+                                 {
+                                     alumnoId = grupoEvalAlumno.Key.UniqueId,
+                                     alumnoNombre = grupoEvalAlumno.Key.Nombre,
+                                     promedio = grupoEvalAlumno.Average(evalua => evalua.Nota)
+                                 };
+                rta.Add(asigConEval.Key, promeAlums);
             }
             return rta;
         }
